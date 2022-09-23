@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partials/head'); -%>
+  </head>
+  <body>
+    <header class="bg-transparent">
+      <div class="container"><%- include('partials/header'); -%></div>
+    </header>
+    <div class="container py-5 w-50">
+      <h2 class="mb-5 text-center">Edit User</h2>
+      <form action="/update-user" method="POST">
+        <div class="form-group">
+          <label for="firstName">First name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="firstName"
+            name="firstName"
+            value="<%= dataUser.firstName %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            name="lastName"
+            value="<%= dataUser.lastName %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            name="email"
+            value="<%= dataUser.email %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            name="address"
+            value="<%= dataUser.address %>"
+          />
+        </div>
+        <input type="text" value="<%= dataUser.id %>" hidden name="id" />
+        <div class="text-center my-4">
+          <button class="btn btn-success w-50 py-2" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+    <footer><%- include('partials/footer'); -%></footer>
+  </body>
+</html>
