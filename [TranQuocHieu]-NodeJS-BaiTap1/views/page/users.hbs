@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link rel="stylesheet" href="/public/assets/css/layout.css" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+</head>
+
+<body id="bg-list">
+    <!-- List -->
+    <div>
+        <section class="my-4">
+            <div class="container">
+                <div class="card border-2 border-primary">
+                    <div class="card-header bg-primary">
+                        <div class="row row-cols-auto justify-content-between align-items-center py-2">
+                            <h3 class="fw-bold col text-white">Người dùng</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th class="text-center">Role</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody class="align-middle" id="user-list">
+
+                            </tbody>
+                        </table>
+                        <nav class="float-end mt-3 me-5">
+                            <ul class="pagination" id="pagination">
+
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="view-user" class="container mb-5">
+
+        </section>
+        <a id="down-load-excel" class="bg-primary text-white ps-2" href="'/users/export-to-excel'">
+            <i class="bi bi-cloud-arrow-down-fill fs-2"></i>
+        </a>
+    </div>
+    <script src="/public/assets/js/users.js" defer></script>
+    <script src="/public/assets/js/cookie.js"></script>
+</body>
+
+</html>

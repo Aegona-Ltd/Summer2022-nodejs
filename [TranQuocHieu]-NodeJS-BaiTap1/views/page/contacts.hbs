@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Contacts</title>
+    <link rel="stylesheet" href="/public/assets/css/layout.css" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+</head>
+
+<body id="bg-list">
+    <!-- List -->
+    <section class="my-4">
+        <div class="container screen">
+            <div class="card border-2 border-primary">
+                <div class="card-header bg-primary">
+                    <div class="row row-cols-auto justify-content-between align-items-center py-2">
+                        <h3 class="fw-bold col text-white">Contacts</h3>
+                        <div class="col">
+                            <div class="row row-cols-auto align-items-center">
+                                <div class="input-group col">
+                                    <button class="input-group-text" id="inputGroup-sizing-default"
+                                        onclick="searchEmail()"><i class="bi bi-search"></i></button>
+                                    <input type="text" class="form-control" id="searchEmail"
+                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+                                        placeholder="Enter search email">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Datetime</th>
+                                <th>Fullname</th>
+                                <th>Email</th>
+                                <th>Phone-Number</th>
+                                <th>Subject</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="align-middle" id="contact-list">
+                            {{#each contacts}}
+                            <tr>
+                                <th>{{this.index}}</th>
+                                <td>{{this.date_time}}</td>
+                                <td>{{this.name}}</td>
+                                <td>{{this.email}}</td>
+                                <td>{{this.phone}}</td>
+                                <td>{{this.subject}}</td>
+                                <td class="text-center">
+                                    <button class="btn btn-outline-success" data-bs-toggle="modal"
+                                        data-bs-target="#view" onclick="viewContact({{this.id}})">View <i class="bi bi-card-list"></i></button>
+                                    <button class="btn btn-outline-danger" onclick="deleteContact({{this.id}})">Delete <i
+                                            class="bi bi-trash3-fill"></i></i></button>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                    <nav class="row justify-content-between align-items-center mt-3 me-5">
+                        <div class="col-3 me-auto">
+                            <div class="row align-items-center gx-2">
+                                <p class="col m-0">Size: </p>
+                                <select class="form-select col" id="selectSize" onchange="selectSize()">
+                                    <option value="5" selected>5</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <ul class="pagination col-auto m-0" id="pagination">
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Model -->
+    <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="labelModel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3 row row-cols-auto justify-content-between">
+                            <p class="m-0 col">Date: <span id="date"></span></p>
+                            <p class="m-0 col">Time: <span id="time"></span></p>
+                        </div>
+                        <div class="mb-3 row">
+                            <p class="m-0 col-3 fw-bold">Email:</p>
+                            <p class="col-9" id="email"></p>
+                        </div>
+                        <div class="mb-3 row">
+                            <p class="m-0 col-3 fw-bold">Phone:</p>
+                            <p class="col-9" id="phone"></p>
+                        </div>
+                        <div class="mb-3 row">
+                            <p class="m-0 col-3 fw-bold">Subject:</p>
+                            <p class="col-9" id="subject"></p>
+                        </div>
+                        <div class="mb-3 row">
+                            <p class="m-0 col-3 fw-bold">Message:</p>
+                            <p class="col-9" id="message"></p>
+                        </div>
+                        <div class="my-3 row justify-content-end" id="div-dl_file">
+                            <a id="down-file" class="col-auto me-2" target="_blank"></a>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a id="down-load-excel" class="bg-primary text-white ps-2" href="/contacts/export-to-excel">
+        <i class="bi bi-cloud-arrow-down-fill fs-2"></i>
+    </a>
+    <script src="/public/assets/js/contacts.js" defer></script>
+    <script src="/public/assets/js/cookie.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="/public/assets/css/layout.css" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+</head>
+<body id="contactForm-img" class="screen">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="rounded-3 bg-white w-75 my-3" id="card-contactForm">
+            <div class="row row-cols-2 align-items-center p-4 pt-0">
+                <div class="col">
+                    <img src="/public/assets/img/contactFormUs.png" alt="Email-img">
+                </div>
+                <div class="col">
+                    <h2 class="text-center my-3 fw-bolder">CONTACT US</h2>
+                    <form class="row row-cols-1 gy-3" name="form-contact" id="form-contact" method="POST" action="/contactForm">
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" name="fullName" id="inputFullName"
+                                       placeholder="Enter your FullName">
+                                <label for="inputFullName">Full Name <span class="text-danger">*</span></label>
+                            </div>
+                        </div>
+                        <p class="text-danger ps-3 m-0 fw-bold" id="messFullname"></p>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" name="email" id="inputEmail"
+                                       placeholder="Enter your email address">
+                                <label for="inputEmail">Email <span class="text-danger">*</span></label>
+                            </div>
+                        </div>
+                        <p class="text-danger ps-3 m-0 fw-bold" id="messEmail"></p>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" name="phone" id="inputPhone"
+                                       placeholder="Enter your phone number">
+                                <label for="inputPhone">Phone Number <span class="text-danger">*</span></label>
+                            </div>
+                        </div>
+                        <p class="text-danger ps-3 m-0 fw-bold" id="messPhone"></p>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" name="subject" id="inputSubject"
+                                       placeholder="Enter Subject" >
+                                <label for="inputSubject">Subject <span class="text-danger">*</span></label>
+                            </div>
+                        </div>
+                        <p class="text-danger ps-3 m-0 fw-bold" id="messSubject"></p>
+                        <div class="col">
+                            <textarea class="form-control" name="messages" placeholder="Enter messages here"
+                                      id="textareaMessage"></textarea>
+                        </div>
+                        <p class="text-danger ps-3 m-0 fw-bold" id="mess"></p>
+                        <div class="col my-3">
+                            <input class="form-control" type="file" id="formFile">
+                        </div>
+                        <p class="text-danger ps-3 m-0 fw-bold" id="messFile"></p>
+                        <div id="capcha">
+                            <div class="g-recaptcha col" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+                            <p class="text-danger fw-bold" id="messRecapcha"></p>
+                        </div>
+                        <div class="col">
+                            <input type="submit" value="SUBMIT" id="btn-submit-ContactUs" class="btn btn-primary w-100">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <script src='/public/assets/js/contactForm.js'></script> -->
+</body>
+</html>
