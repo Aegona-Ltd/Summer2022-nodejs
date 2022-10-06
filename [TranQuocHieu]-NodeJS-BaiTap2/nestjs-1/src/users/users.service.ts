@@ -8,6 +8,7 @@ import { User } from '../model/users.model';
 import { LoginRequest } from '../model/request/login.dto';
 import { UserResponse } from '../model/response/user.response';
 import { GenericResponse } from '../model/response/generic.reponse';
+import { HTTPStatus } from 'src/enums/status.enum';
 
 @Injectable()
 export class UsersService {
@@ -21,7 +22,7 @@ export class UsersService {
   async create(user: CreateUserDTO) {
     Logger.log('Entered UserService create...');
     const gResponse = new GenericResponse();
-    gResponse.status = 500;
+    gResponse.status = HTTPStatus.INTERNAL_SERVER_ERROR;
     // Hash Password
     const saltOrRounds = 10;
     const passHash = await bcrypt.hash(user.password, saltOrRounds);
@@ -40,7 +41,7 @@ export class UsersService {
     userR.name = newUser.name;
     userR.isAdmin = newUser.isAdmin;
 
-    gResponse.status = 200;
+    gResponse.status = HTTPStatus.OK;
     gResponse.data = userR;
     gResponse.message = 'Create User Success';
     Logger.log('Add user success');
@@ -61,7 +62,7 @@ export class UsersService {
       return userRes;
     });
     const gResponse = new GenericResponse();
-    gResponse.status = 200;
+    gResponse.status = HTTPStatus.OK;
     gResponse.data = listUser;
     Logger.log('Exited UserService findAll.');
     return gResponse;
@@ -78,7 +79,7 @@ export class UsersService {
     userResponse.isAdmin = user.isAdmin;
 
     const gResponse = new GenericResponse();
-    gResponse.status = 200;
+    gResponse.status = HTTPStatus.OK;
     gResponse.data = userResponse;
     Logger.log('Exited UserService findByid.');
     return gResponse;
@@ -99,7 +100,7 @@ export class UsersService {
     Logger.log('Exited UserService delete.');
     const gResponse = new GenericResponse();
     gResponse.data = true;
-    gResponse.status = 200;
+    gResponse.status = HTTPStatus.OK;
     return gResponse;
   }
 
@@ -108,9 +109,9 @@ export class UsersService {
     Logger.log('Entered UserService login...');
     const user = await this.userRepository.findOneBy({ email: request.email });
     const gResponse = new GenericResponse();
-    gResponse.status = 200;
+    gResponse.status = HTTPStatus.OK;
     if (user == null) {
-      gResponse.status = 400;
+      gResponse.status = HTTPStatus.BAD_REQUEST;
       gResponse.data = false;
       return gResponse;
     }

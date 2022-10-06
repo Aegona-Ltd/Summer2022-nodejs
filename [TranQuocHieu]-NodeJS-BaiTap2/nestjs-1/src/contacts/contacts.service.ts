@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { HTTPStatus } from 'src/enums/status.enum';
 import { Repository } from 'typeorm';
 import { Contact } from './../model/contacts.model';
 import { GenericResponse } from './../model/response/generic.reponse';
@@ -16,7 +17,7 @@ export class ContactService {
     Logger.log('Entered ContactService create...');
     const date = new Date();
     const gResponse = new GenericResponse();
-    gResponse.status = 200;
+    gResponse.status = HTTPStatus.OK;
     contact.dateTime = date.toISOString();
     await this.contactRepository.save(contact);
     gResponse.data = true;
@@ -29,7 +30,7 @@ export class ContactService {
     Logger.log('Entered ContactService getList');
     const listContact = await this.contactRepository.find();
     const gResponse = new GenericResponse();
-    gResponse.status = 200;
+    gResponse.status = HTTPStatus.OK;
     gResponse.data = listContact;
     gResponse.message = 'Success';
     Logger.log('Exited ContactService getList.');
@@ -40,7 +41,7 @@ export class ContactService {
     Logger.log('Entered ContactService getContactById');
     const listContact = await this.contactRepository.findOneBy({ id });
     const gResponse = new GenericResponse();
-    gResponse.status = 200;
+    gResponse.status = HTTPStatus.OK;
     gResponse.data = listContact;
     gResponse.message = 'Success';
     Logger.log('Exited ContactService getContactById.');
@@ -52,7 +53,7 @@ export class ContactService {
     Logger.log('Entered ContactService delete');
     await this.contactRepository.delete({ id });
     const gResponse = new GenericResponse();
-    gResponse.status = 200;
+    gResponse.status = HTTPStatus.OK;
     gResponse.data = true;
     gResponse.message = 'Success';
     Logger.log('Exited ContactService delete.');
